@@ -1,8 +1,23 @@
 import tkinter as tk
+from tkinter import *
 from tkinter import messagebox
 from tkcalendar import Calendar
 import json
 
+class Table:
+     
+    def __init__(self,root):
+         
+        # code for creating table
+        for i in range(total_rows):
+            for j in range(total_columns):
+                 
+                self.e = Entry(root, width=20, fg='black',
+                               font=('Arial',11,'normal'))
+                 
+                self.e.grid(row=i, column=j)
+                self.e.insert(END, lst[i][j])
+ 
 # ---------- TASK 1 ----------
 def read_products(filename):
     products = []
@@ -41,38 +56,65 @@ def read_sales(filename):
 
 
 # ---------- TASK 2 ----------
-def display_task_1_and_2(root):
+def display_task_1(root):
     products = read_products("data/products.json")
-    sales = read_sales("data/sales.json")
-
+    headers = ['ID', 'Name', 'Category', 'Price']
+    table_data = [headers] + [list(product) for product in products]
 
     # Create Toplevel window and position it beside the main window
-    window = tk.Toplevel(root)
-    window.title("Task 1 & 2: Display Products and Sales")
+    window = Toplevel(root)
+    window.title("Task 1: Display Products")
    
     # Position window beside the main window
     x = root.winfo_x() + root.winfo_width()
     y = root.winfo_y()
     window.geometry(f"600x400+{x}+{y}")
 
+    # Set global variables for table
+    global lst, total_rows, total_columns
+    lst = table_data
+    total_rows = len(lst)
+    total_columns = len(lst[0])
 
-    product_listbox = tk.Listbox(window, width=50, height=12)
-    product_listbox.grid(row=0, column=0, padx=10, pady=10)
+    # Create table
+    Table(window)
 
+    # product_listbox = tk.Listbox(window, width=50, height=12)
+    # product_listbox.grid(row=0, column=0, padx=10, pady=10)
 
-    sales_listbox = tk.Listbox(window, width=50, height=12)
-    sales_listbox.grid(row=0, column=1, padx=10, pady=10)
+    # for product in products:
+    #     product_listbox.insert(tk.END, f"ProductID: {product[0]}, Name: {product[1]}, Category: {product[2]}, Price: {product[3]}")
 
+    # Add Close button at the bottom
+    close_button = tk.Button(window, text="Close", command=window.destroy)
+    close_button.grid(row=total_rows + 1, columnspan=total_columns, pady=10)
 
-    for product in products:
-        product_listbox.insert(tk.END, f"ProductID: {product[0]}, Name: {product[1]}, Category: {product[2]}, Price: {product[3]}")
+#--------TASK 2---------
+#razdeleni za da moje da raboti table (murzi me)
+#ne sa pravilni opisaniqta na funkciite no mi trqbvaha dve za dvete tablici
+def display_task_2(root):
+    sales = read_sales("data/sales.json")
+    window = tk.Toplevel(root)
+    window.title("Task 2: Display Sales")
+    headers = ['Name', 'Quantity', 'Date']
+    table_data = [headers] + [list(sale) for sale in sales]
+    
+   
+    # Position window beside the main window
+    x = root.winfo_x() + root.winfo_width()
+    y = root.winfo_y()
+    window.geometry(f"600x400+{x}+{y}")
 
+    # Set global variables for table
+    global lst, total_rows, total_columns
+    lst = table_data
+    total_rows = len(lst)
+    total_columns = len(lst[0])
 
-    for sale in sales:
-        sales_listbox.insert(tk.END, f"Product: {sale[0]}, Quantity: {sale[1]}, Date: {sale[2]}")
-
-
-    tk.Button(window, text="Close", command=window.destroy).grid(row=1, columnspan=2, pady=10)
+    # Create table
+    Table(window)
+    close_button = tk.Button(window, text="Close", command=window.destroy)
+    close_button.grid(row=total_rows + 1, columnspan=total_columns, pady=10)
 
 
 # ---------- TASK 3 ----------
@@ -89,7 +131,7 @@ def summarize_sales(sales):
 def display_task_3(root):
     sales = read_sales("data/sales.json")
     summary = summarize_sales(sales)
-
+    
 
     window = tk.Toplevel(root)
     window.title("Task 3: Summary of Sales")
@@ -100,7 +142,7 @@ def display_task_3(root):
     y = root.winfo_y()
     window.geometry(f"600x400+{x}+{y}")
 
-
+    
     listbox = tk.Listbox(window, width=50, height=15)
     listbox.pack(padx=10, pady=10)
 
@@ -290,7 +332,8 @@ def main_menu():
     tk.Label(root, text="Choose a Task to View:", font=("Arial", 14)).pack(pady=10)
 
 
-    tk.Button(root, text="Task 1 & 2: Read and Display Data", width=40, command=lambda: display_task_1_and_2(root)).pack(pady=5)
+    tk.Button(root, text="Task 1&2 Dispalay Products", width=40, command=lambda: display_task_1(root)).pack(pady=5)
+    tk.Button(root, text="Task 1&2: Display Sales", width=40, command=lambda: display_task_2(root)).pack(pady=5)
     tk.Button(root, text="Task 3: Summary Dictionary", width=40, command=lambda: display_task_3(root)).pack(pady=5)
     tk.Button(root, text="Task 4: Search in Dictionary", width=40, command=lambda: display_task_4(root)).pack(pady=5)
     tk.Button(root, text="Task 5: Filter Sales by Quantity", width=40, command=lambda: display_task_5(root)).pack(pady=5)

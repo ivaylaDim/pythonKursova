@@ -1,6 +1,6 @@
 # pythonKursova
 1 стъпка - Изтегли git
-2 стъпка - влизаш в папка за курсовата, напр. pythonkursova и отваряш cmd за нея 
+2 стъпка - влизаш в празна (!) папка за курсовата, напр. pythonkursova и отваряш cmd за нея 
 3 стъпка - Пишеш git init, git pull https://github.com/ivaylaDim/pythonKursova.git, това тегли всички файлове от main бранча до момента
 4 стъпка - Влизаш във Visual Studio Code и добавяш папката към workspace
 5 стъпка - В горния ляв ъгъл трябва да има terminal, отваряш го за текущата папка

@@ -257,7 +257,8 @@ def display_task_5(root):
 def display_task_7(root):
     sales = [("Apple", 20, "2025-05-01"), ("Banana", 30, "2025-05-02")]
 
-
+    # На тази задача вместо да се въвежда ръчно в полета може да има опция да се
+    # изкарват данни от json-а и да влизат в dowpdown
     def add_sale():
         name = name_entry.get()
         quantity = quantity_entry.get()

@@ -1,31 +1,49 @@
 import tkinter as tk
 from tkinter import messagebox
 from tkcalendar import Calendar
+import json
 
-#test
 # ---------- TASK 1 ----------
 def read_products(filename):
     products = []
-    with open(filename, "r", encoding="utf-8") as file:
-        for line in file:
-            name, category, price = line.strip().split(",")
-            products.append((name, category, float(price)))
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            data = json.load(file)
+            product_list = data.get("products", [])
+            for item in product_list:
+                if isinstance(item, dict):
+                    id = int(item.get("productID", 0))
+                    name = item.get('name', '')
+                    category = item.get('category', '')
+                    price = float(item.get('price', 0))
+                    products.append((id, name, category, price))
+    except (json.JSONDecodeError, FileNotFoundError) as e:
+        print("Error reading products:", e)
     return products
 
 
 def read_sales(filename):
     sales = []
-    with open(filename, "r", encoding="utf-8") as file:
-        for line in file:
-            name, quantity, date = line.strip().split(",")
-            sales.append((name, int(quantity), date))
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            data = json.load(file)
+            category_list = data.get("sales",[])
+            for item in category_list:
+                if isinstance(item, dict):
+                    name = item.get('productName','')
+                    quantity = int(item.get('quantity', 0))
+                    date = item.get('date', '')
+                    sales.append((name, quantity, date))
+                    # trqbva da se dobavi id za vsqka pokupka, za da moje da se vidi vuv vid na kasova belejka 
+    except (json.JSONDecodeError, FileNotFoundError) as e:
+        print("Error reading products:", e)
     return sales
 
 
 # ---------- TASK 2 ----------
 def display_task_1_and_2(root):
-    products = read_products("products.txt")
-    sales = read_sales("sales.txt")
+    products = read_products("data/products.json")
+    sales = read_sales("data/sales.json")
 
 
     # Create Toplevel window and position it beside the main window
@@ -47,7 +65,7 @@ def display_task_1_and_2(root):
 
 
     for product in products:
-        product_listbox.insert(tk.END, f"Product: {product[0]}, Category: {product[1]}, Price: {product[2]}")
+        product_listbox.insert(tk.END, f"ProductID: {product[0]}, Name: {product[1]}, Category: {product[2]}, Price: {product[3]}")
 
 
     for sale in sales:
@@ -69,7 +87,7 @@ def summarize_sales(sales):
 
 
 def display_task_3(root):
-    sales = read_sales("sales.txt")
+    sales = read_sales("data/sales.json")
     summary = summarize_sales(sales)
 
 
@@ -96,7 +114,7 @@ def display_task_3(root):
 
 # ---------- TASK 4 ----------
 def display_task_4(root):
-    sales = read_sales("sales.txt")
+    sales = read_sales("data/sales.json")
     summary = summarize_sales(sales)
 
 
@@ -137,8 +155,7 @@ def filter_sales_by_quantity(sales, min_quantity=5):
 
 
 def display_task_5(root):
-    sales = read_sales("sales.txt")
-
+    sales = read_sales("data/sales.json")
 
     def show_filtered():
         min_qty = int(spinbox.get())
@@ -159,9 +176,10 @@ def display_task_5(root):
             messagebox.showinfo("No Data", "No filtered data to save. Please filter first.")
             return
 
-
-        filename = "filtered_sales.txt"
+        
+        filename = "filtered_sales.json"
         with open(filename, "w", encoding="utf-8") as f:
+            #trqbva da se convertne za da moje da se save-va kato json
             for sale in filtered_sales:
                 f.write(f"{sale[0]},{sale[1]},{sale[2]}\n")
         messagebox.showinfo("Saved", f"Filtered sales saved to {filename}")
@@ -219,7 +237,7 @@ def display_task_7(root):
         sales.append((name, quantity, date))
 
 
-        with open("sales.txt", "a", encoding="utf-8") as file:
+        with open("data/sales.json", "a", encoding="utf-8") as file:
             file.write(f"{name},{quantity},{date}\n")
 
 

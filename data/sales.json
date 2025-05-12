@@ -1,0 +1,26 @@
+{
+    "sales":[
+        {
+            "productName":"Espresso",
+            "quantity":2,
+            "date":"2025-05-03"
+        },
+        {
+            "productName":"Matcha latte",
+            "quantity":1,
+            "date":"2025-05-03"
+        },
+        {
+            "productName":"Espresso",
+            "quantity":1,
+            "date":"2025-05-04"
+        }
+        ,{
+            "productName":"Cappuccino",
+            "quantity":2,
+            "date":"2025-05-04"
+        }
+
+    ]
+
+}

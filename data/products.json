@@ -1,0 +1,65 @@
+{
+    "products": [
+        {
+            "productID": 1,
+            "name": "Espresso",
+            "category": "Coffee",
+            "price": 1.20
+        },
+        {
+            "productID": 2,
+            "name": "Cappuccino",
+            "category": "Coffee",
+            "price": 3.50
+        },
+        
+        {
+            "productID": 3,
+            "name": "Chocolate Muffin",
+            "category": "Pastries",
+            "price": 4.90
+        },
+        {
+            "productID": 4,
+            "name": "Green Tea",
+            "category": "Tea",
+            "price": 2.00
+        },
+        {
+            "productID": 5,
+            "name": "Croissant",
+            "category": "Pastries",
+            "price": 3.90
+        },
+        {
+            "productID":6,
+            "name": "Latte",
+            "category":"Coffee",
+            "price":2.50
+        },
+        {
+            "productID":7,
+            "name":"Matcha latte",
+            "category":"Tea",
+            "price":4.20
+        },
+        {
+            "productID":8,
+            "name":"Milk",
+            "category":"Extras",
+            "price":0.20
+        },
+        {
+            "productID":9,
+            "name":"Lactose-free Milk",
+            "category":"Extras",
+            "price":0.50
+        },
+        {
+            "productID":10,
+            "name":"Espresso shot",
+            "category":"Extras",
+            "price":1.00
+        }
+    ]
+}

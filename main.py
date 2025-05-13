@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import messagebox
 from tkcalendar import Calendar
 import json
+import os
 
 class Table:
      
@@ -261,33 +262,39 @@ def display_task_7(root):
     # На тази задача вместо да се въвежда ръчно в полета може да има опция да се
     # изкарват данни от json-а и да влизат в dowpdown
     def add_sale():
-        name = name_entry.get()
-        quantity = quantity_entry.get()
-        date = cal.get_date()
+     name = name_entry.get()
+     quantity = quantity_entry.get()
+     date = cal.get_date()
 
+     if not name or not quantity or not date:
+        messagebox.showwarning("Input Error", "Please fill in all fields.")
+        return
 
-        if not name or not quantity or not date:
-            messagebox.showwarning("Input Error", "Please fill in all fields.")
-            return
+     try:
+        quantity = int(quantity)
+     except ValueError:
+        messagebox.showwarning("Input Error", "Quantity must be a number.")
+        return
 
+     new_sale = {"productName": name, "quantity": quantity, "date": date}
 
-        try:
-            quantity = int(quantity)
-        except ValueError:
-            messagebox.showwarning("Input Error", "Quantity must be a number.")
-            return
+    # Read existing sales
+     if os.path.exists("data/sales.json"):
+        with open("data/sales.json", "r", encoding="utf-8") as f:
+            data = json.load(f)
+     else:
+        data = {}
 
+     sales_list = data.get("sales", [])
+     sales_list.append(new_sale)
+     data["sales"] = sales_list
 
-        sales.append((name, quantity, date))
+     with open("data/sales.json", "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=4)
 
-
-        with open("data/sales.json", "a", encoding="utf-8") as file:
-            file.write(f"{name},{quantity},{date}\n")
-
-
-        listbox.insert(tk.END, f"{name} - {quantity} pcs on {date}")
-        name_entry.delete(0, tk.END)
-        quantity_entry.delete(0, tk.END)
+     listbox.insert(tk.END, f"{name} - {quantity} pcs on {date}")
+     name_entry.delete(0, tk.END)
+     quantity_entry.delete(0, tk.END)
 
 
     window = tk.Toplevel(root)

@@ -1,26 +1,29 @@
 {
-    "sales":[
+    "sales": [
         {
-            "productName":"Espresso",
-            "quantity":2,
-            "date":"2025-05-03"
+            "productName": "Espresso",
+            "quantity": 2,
+            "date": "2025-05-03"
         },
         {
-            "productName":"Matcha latte",
-            "quantity":1,
-            "date":"2025-05-03"
+            "productName": "Matcha latte",
+            "quantity": 1,
+            "date": "2025-05-03"
         },
         {
-            "productName":"Espresso",
-            "quantity":1,
-            "date":"2025-05-04"
+            "productName": "Espresso",
+            "quantity": 1,
+            "date": "2025-05-04"
+        },
+        {
+            "productName": "Cappuccino",
+            "quantity": 2,
+            "date": "2025-05-04"
+        },
+        {
+            "productName": "adad",
+            "quantity": 88,
+            "date": "2025-05-29"
         }
-        ,{
-            "productName":"Cappuccino",
-            "quantity":2,
-            "date":"2025-05-04"
-        }
-
     ]
-
 }

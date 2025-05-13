@@ -18,6 +18,7 @@ class Table:
                 self.e.grid(row=i, column=j)
                 self.e.insert(END, lst[i][j])
  
+# Am i in dzhan
 # ---------- TASK 1 ----------
 def read_products(filename):
     products = []

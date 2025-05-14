@@ -1,60 +1,128 @@
 import tkinter as tk
+from tkinter import *
 from tkinter import messagebox
 from tkcalendar import Calendar
+import json
+import os
 
-#test
+class Table:
+    def __init__(self, root):
+        for i in range(total_rows):
+            for j in range(total_columns):
+                if i == 0:
+                    # Header row style
+                    self.e = Entry(root, width=20, fg='white',
+                                   font=('Arial', 11, 'bold'),
+                                   bg='darkblue', justify='center')
+                else:
+                    # Regular data row style
+                    self.e = Entry(root, width=20, fg='black',
+                                   font=('Arial', 11, 'normal'),
+                                   justify='center')
+
+                self.e.grid(row=i, column=j)
+                self.e.insert(END, lst[i][j])
+
+ 
+# Am i in dzhan
 # ---------- TASK 1 ----------
 def read_products(filename):
     products = []
-    with open(filename, "r", encoding="utf-8") as file:
-        for line in file:
-            name, category, price = line.strip().split(",")
-            products.append((name, category, float(price)))
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            data = json.load(file)
+            product_list = data.get("products", [])
+            for item in product_list:
+                if isinstance(item, dict):
+                    id = int(item.get("productID", 0))
+                    name = item.get('name', '')
+                    category = item.get('category', '')
+                    price = round(float(item.get('price', 0)), 2)
+
+                    products.append((id, name, category, format(price, '.2f')))
+    except (json.JSONDecodeError, FileNotFoundError) as e:
+        print("Error reading products:", e)
     return products
 
 
 def read_sales(filename):
     sales = []
-    with open(filename, "r", encoding="utf-8") as file:
-        for line in file:
-            name, quantity, date = line.strip().split(",")
-            sales.append((name, int(quantity), date))
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            data = json.load(file)
+            category_list = data.get("sales",[])
+            for item in category_list:
+                if isinstance(item, dict):
+                    name = item.get('productName','')
+                    quantity = int(item.get('quantity', 0))
+                    date = item.get('date', '')
+                    sales.append((name, quantity, date))
+                    # trqbva da se dobavi id za vsqka pokupka, za da moje da se vidi vuv vid na kasova belejka 
+    except (json.JSONDecodeError, FileNotFoundError) as e:
+        print("Error reading products:", e)
     return sales
 
 
 # ---------- TASK 2 ----------
-def display_task_1_and_2(root):
-    products = read_products("products.txt")
-    sales = read_sales("sales.txt")
-
+def display_task_1(root):
+    products = read_products("data/products.json")
+    headers = ['ID', 'Name', 'Category', 'Price']
+    table_data = [headers] + [list(product) for product in products]
 
     # Create Toplevel window and position it beside the main window
-    window = tk.Toplevel(root)
-    window.title("Task 1 & 2: Display Products and Sales")
+    window = Toplevel(root)
+    window.title("Task 1: Display Products")
    
     # Position window beside the main window
     x = root.winfo_x() + root.winfo_width()
     y = root.winfo_y()
     window.geometry(f"600x400+{x}+{y}")
 
+    # Set global variables for table
+    global lst, total_rows, total_columns
+    lst = table_data
+    total_rows = len(lst)
+    total_columns = len(lst[0])
 
-    product_listbox = tk.Listbox(window, width=50, height=12)
-    product_listbox.grid(row=0, column=0, padx=10, pady=10)
+    # Create table
+    Table(window)
 
+    # product_listbox = tk.Listbox(window, width=50, height=12)
+    # product_listbox.grid(row=0, column=0, padx=10, pady=10)
 
-    sales_listbox = tk.Listbox(window, width=50, height=12)
-    sales_listbox.grid(row=0, column=1, padx=10, pady=10)
+    # for product in products:
+    #     product_listbox.insert(tk.END, f"ProductID: {product[0]}, Name: {product[1]}, Category: {product[2]}, Price: {product[3]}")
 
+    # Add Close button at the bottom
+    close_button = tk.Button(window, text="Close", command=window.destroy)
+    close_button.grid(row=total_rows + 1, columnspan=total_columns, pady=10)
 
-    for product in products:
-        product_listbox.insert(tk.END, f"Product: {product[0]}, Category: {product[1]}, Price: {product[2]}")
+#--------TASK 2---------
+#razdeleni za da moje da raboti table (murzi me)
+#ne sa pravilni opisaniqta na funkciite no mi trqbvaha dve za dvete tablici
+def display_task_2(root):
+    sales = read_sales("data/sales.json")
+    window = tk.Toplevel(root)
+    window.title("Task 2: Display Sales")
+    headers = ['Name', 'Quantity', 'Date']
+    table_data = [headers] + [list(sale) for sale in sales]
+    
+   
+    # Position window beside the main window
+    x = root.winfo_x() + root.winfo_width()
+    y = root.winfo_y()
+    window.geometry(f"600x400+{x}+{y}")
 
+    # Set global variables for table
+    global lst, total_rows, total_columns
+    lst = table_data
+    total_rows = len(lst)
+    total_columns = len(lst[0])
 
-    for sale in sales:
-        sales_listbox.insert(tk.END, f"Product: {sale[0]}, Quantity: {sale[1]}, Date: {sale[2]}")
-
-
-    tk.Button(window, text="Close", command=window.destroy).grid(row=1, columnspan=2, pady=10)
+    # Create table
+    Table(window)
+    close_button = tk.Button(window, text="Close", command=window.destroy)
+    close_button.grid(row=total_rows + 1, columnspan=total_columns, pady=10)
 
 
 # ---------- TASK 3 ----------
@@ -69,34 +137,38 @@ def summarize_sales(sales):
 
 
 def display_task_3(root):
-    sales = read_sales("sales.txt")
+    sales = read_sales("data/sales.json")
     summary = summarize_sales(sales)
-
 
     window = tk.Toplevel(root)
     window.title("Task 3: Summary of Sales")
-
 
     # Position window beside the main window
     x = root.winfo_x() + root.winfo_width()
     y = root.winfo_y()
     window.geometry(f"600x400+{x}+{y}")
 
+    # Prepare table data
+    headers = ['Product Name', 'Total Sold']
+    table_data = [headers] + [[product, total] for product, total in summary.items()]
 
-    listbox = tk.Listbox(window, width=50, height=15)
-    listbox.pack(padx=10, pady=10)
+    # Set global variables for the table
+    global lst, total_rows, total_columns
+    lst = table_data
+    total_rows = len(lst)
+    total_columns = len(lst[0])
 
+    # Create table
+    Table(window)
 
-    for product, total in summary.items():
-        listbox.insert(tk.END, f"{product}: Total Sold = {total}")
-
-
-    tk.Button(window, text="Close", command=window.destroy).pack(pady=5)
+    # Add Close button
+    close_button = tk.Button(window, text="Close", command=window.destroy)
+    close_button.grid(row=total_rows + 1, columnspan=total_columns, pady=10)
 
 
 # ---------- TASK 4 ----------
 def display_task_4(root):
-    sales = read_sales("sales.txt")
+    sales = read_sales("data/sales.json")
     summary = summarize_sales(sales)
 
 
@@ -120,7 +192,7 @@ def display_task_4(root):
 
 
     def search():
-        product = entry.get().strip()
+        product = entry.get().strip().capitalize()
         if product in summary:
             result_label.config(text=f"{product} → Total Sold: {summary[product]}")
         else:
@@ -137,8 +209,7 @@ def filter_sales_by_quantity(sales, min_quantity=5):
 
 
 def display_task_5(root):
-    sales = read_sales("sales.txt")
-
+    sales = read_sales("data/sales.json")
 
     def show_filtered():
         min_qty = int(spinbox.get())
@@ -159,9 +230,10 @@ def display_task_5(root):
             messagebox.showinfo("No Data", "No filtered data to save. Please filter first.")
             return
 
-
-        filename = "filtered_sales.txt"
+        
+        filename = "filtered_sales.json"
         with open(filename, "w", encoding="utf-8") as f:
+            #trqbva da se convertne za da moje da se save-va kato json
             for sale in filtered_sales:
                 f.write(f"{sale[0]},{sale[1]},{sale[2]}\n")
         messagebox.showinfo("Saved", f"Filtered sales saved to {filename}")
@@ -197,35 +269,42 @@ def display_task_5(root):
 def display_task_7(root):
     sales = [("Apple", 20, "2025-05-01"), ("Banana", 30, "2025-05-02")]
 
-
+    # На тази задача вместо да се въвежда ръчно в полета може да има опция да се
+    # изкарват данни от json-а и да влизат в dowpdown
     def add_sale():
-        name = name_entry.get()
-        quantity = quantity_entry.get()
-        date = cal.get_date()
+     name = name_entry.get()
+     quantity = quantity_entry.get()
+     date = cal.get_date()
 
+     if not name or not quantity or not date:
+        messagebox.showwarning("Input Error", "Please fill in all fields.")
+        return
 
-        if not name or not quantity or not date:
-            messagebox.showwarning("Input Error", "Please fill in all fields.")
-            return
+     try:
+        quantity = int(quantity)
+     except ValueError:
+        messagebox.showwarning("Input Error", "Quantity must be a number.")
+        return
 
+     new_sale = {"productName": name, "quantity": quantity, "date": date}
 
-        try:
-            quantity = int(quantity)
-        except ValueError:
-            messagebox.showwarning("Input Error", "Quantity must be a number.")
-            return
+    # Read existing sales
+     if os.path.exists("data/sales.json"):
+        with open("data/sales.json", "r", encoding="utf-8") as f:
+            data = json.load(f)
+     else:
+        data = {}
 
+     sales_list = data.get("sales", [])
+     sales_list.append(new_sale)
+     data["sales"] = sales_list
 
-        sales.append((name, quantity, date))
+     with open("data/sales.json", "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=4)
 
-
-        with open("sales.txt", "a", encoding="utf-8") as file:
-            file.write(f"{name},{quantity},{date}\n")
-
-
-        listbox.insert(tk.END, f"{name} - {quantity} pcs on {date}")
-        name_entry.delete(0, tk.END)
-        quantity_entry.delete(0, tk.END)
+     listbox.insert(tk.END, f"{name} - {quantity} pcs on {date}")
+     name_entry.delete(0, tk.END)
+     quantity_entry.delete(0, tk.END)
 
 
     window = tk.Toplevel(root)
@@ -272,7 +351,8 @@ def main_menu():
     tk.Label(root, text="Choose a Task to View:", font=("Arial", 14)).pack(pady=10)
 
 
-    tk.Button(root, text="Task 1 & 2: Read and Display Data", width=40, command=lambda: display_task_1_and_2(root)).pack(pady=5)
+    tk.Button(root, text="Task 1&2 Dispalay Products", width=40, command=lambda: display_task_1(root)).pack(pady=5)
+    tk.Button(root, text="Task 1&2: Display Sales", width=40, command=lambda: display_task_2(root)).pack(pady=5)
     tk.Button(root, text="Task 3: Summary Dictionary", width=40, command=lambda: display_task_3(root)).pack(pady=5)
     tk.Button(root, text="Task 4: Search in Dictionary", width=40, command=lambda: display_task_4(root)).pack(pady=5)
     tk.Button(root, text="Task 5: Filter Sales by Quantity", width=40, command=lambda: display_task_5(root)).pack(pady=5)

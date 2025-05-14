@@ -139,27 +139,31 @@ def summarize_sales(sales):
 def display_task_3(root):
     sales = read_sales("data/sales.json")
     summary = summarize_sales(sales)
-    
 
     window = tk.Toplevel(root)
     window.title("Task 3: Summary of Sales")
-
 
     # Position window beside the main window
     x = root.winfo_x() + root.winfo_width()
     y = root.winfo_y()
     window.geometry(f"600x400+{x}+{y}")
 
-    
-    listbox = tk.Listbox(window, width=50, height=15)
-    listbox.pack(padx=10, pady=10)
+    # Prepare table data
+    headers = ['Product Name', 'Total Sold']
+    table_data = [headers] + [[product, total] for product, total in summary.items()]
 
+    # Set global variables for the table
+    global lst, total_rows, total_columns
+    lst = table_data
+    total_rows = len(lst)
+    total_columns = len(lst[0])
 
-    for product, total in summary.items():
-        listbox.insert(tk.END, f"{product}: Total Sold = {total}")
+    # Create table
+    Table(window)
 
-
-    tk.Button(window, text="Close", command=window.destroy).pack(pady=5)
+    # Add Close button
+    close_button = tk.Button(window, text="Close", command=window.destroy)
+    close_button.grid(row=total_rows + 1, columnspan=total_columns, pady=10)
 
 
 # ---------- TASK 4 ----------
@@ -188,7 +192,7 @@ def display_task_4(root):
 
 
     def search():
-        product = entry.get().strip()
+        product = entry.get().strip().capitalize()
         if product in summary:
             result_label.config(text=f"{product} → Total Sold: {summary[product]}")
         else:

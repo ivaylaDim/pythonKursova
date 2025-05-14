@@ -32,8 +32,9 @@ def read_products(filename):
                     id = int(item.get("productID", 0))
                     name = item.get('name', '')
                     category = item.get('category', '')
-                    price = float(item.get('price', 0))
-                    products.append((id, name, category, price))
+                    price = round(float(item.get('price', 0)), 2)
+
+                    products.append((id, name, category, format(price, '.2f')))
     except (json.JSONDecodeError, FileNotFoundError) as e:
         print("Error reading products:", e)
     return products

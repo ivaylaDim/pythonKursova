@@ -7,12 +7,19 @@ import os
 
 class Table:
     def __init__(self, root):
-        # code for creating table
         for i in range(total_rows):
             for j in range(total_columns):
-                self.e = Entry(root, width=20, fg='black',
-                               font=('Arial', 11, 'normal'),
-                               justify='center')  # Center text here
+                if i == 0:
+                    # Header row style
+                    self.e = Entry(root, width=20, fg='white',
+                                   font=('Arial', 11, 'bold'),
+                                   bg='darkblue', justify='center')
+                else:
+                    # Regular data row style
+                    self.e = Entry(root, width=20, fg='black',
+                                   font=('Arial', 11, 'normal'),
+                                   justify='center')
+
                 self.e.grid(row=i, column=j)
                 self.e.insert(END, lst[i][j])
 

@@ -224,60 +224,50 @@ def filter_sales_by_quantity(sales, min_quantity=5):
 
 def display_task_5(root):
     sales = read_sales("data/sales.json")
-
-    def show_filtered():
-        min_qty = int(spinbox.get())
-        nonlocal filtered_sales
-        filtered_sales = filter_sales_by_quantity(sales, min_qty)
-
-
-        listbox.delete(0, tk.END)
-        if filtered_sales:
-            for sale in filtered_sales:
-                listbox.insert(tk.END, f"{sale[0]} - {sale[1]} pcs on {sale[2]}")
-        else:
-            listbox.insert(tk.END, f"No sales with quantity ≥ {min_qty}.")
-
-
-    def save_to_file():
-        if not filtered_sales:
-            messagebox.showinfo("No Data", "No filtered data to save. Please filter first.")
-            return
-
-        
-        filename = "filtered_sales.json"
-        with open(filename, "w", encoding="utf-8") as f:
-            #trqbva da se convertne za da moje da se save-va kato json
-            for sale in filtered_sales:
-                f.write(f"{sale[0]},{sale[1]},{sale[2]}\n")
-        messagebox.showinfo("Saved", f"Filtered sales saved to {filename}")
-
-
-    filtered_sales = []
-
-
+    
     window = tk.Toplevel(root)
-    window.title("Task 5 & 6: Filter and Save Sales")
-
+    window.title("Task 5: Display & Filter Sales")
 
     x = root.winfo_x() + root.winfo_width()
     y = root.winfo_y()
     window.geometry(f"600x400+{x}+{y}")
 
-
     tk.Label(window, text="Minimum Quantity:").pack(pady=(10, 0))
     spinbox = tk.Spinbox(window, from_=1, to=100, width=5)
     spinbox.pack(pady=5)
 
+    # Container frame to hold the table grid
+    table_frame = tk.Frame(window)
+    table_frame.pack(padx=10, pady=10)
 
-    listbox = tk.Listbox(window, width=50, height=15)
-    listbox.pack(padx=10, pady=10)
+    headers = ['Product ID', 'Quantity', 'Date']
 
+    def show_table(data):
+        # Clear previous widgets in table_frame
+        for widget in table_frame.winfo_children():
+            widget.destroy()
 
-    tk.Button(window, text="Show Filtered Sales", command=show_filtered).pack(pady=5)
-    tk.Button(window, text="Save to File", command=save_to_file).pack(pady=5)
+        # Prepare the list to feed Table class: first row headers + data rows
+        table_data = [headers] + data
+
+        global lst, total_rows, total_columns
+        lst = table_data
+        total_rows = len(lst)
+        total_columns = len(lst[0])
+
+        # Create Table inside table_frame
+        Table(table_frame)
+
+    def apply_filter():
+        min_qty = int(spinbox.get())
+        filtered = [sale for sale in sales if sale[1] >= min_qty]
+        show_table(filtered)
+
+    # Show all sales initially
+    show_table(sales)
+
+    tk.Button(window, text="Apply Filter", command=apply_filter).pack(pady=5)
     tk.Button(window, text="Close", command=window.destroy).pack(pady=5)
-
 
 # ---------- TASK 7 ----------
 def display_task_7(root):

@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk, messagebox
 from tkcalendar import Calendar
+from datetime import datetime
 import json
 import os
 
@@ -354,6 +355,125 @@ def display_task_7(root):
     for sale in sales:
         listbox.insert(tk.END, f"{sale[0]} - {sale[1]} pcs on {sale[2]}")
 
+
+# ---------- TASK 8 ----------
+def display_task_8(root):
+    # Load product list from JSON
+    with open("data/products.json", "r", encoding="utf-8") as f:
+        products_data = json.load(f)["products"]
+    product_names = [product["name"] for product in products_data]
+
+    selected_products = []
+
+    def add_product():
+        name = product_combo.get()
+        quantity_str = quantity_entry.get()
+
+        if not name or not quantity_str:
+            messagebox.showwarning("Input Error", "Please select a product and enter quantity.")
+            return
+
+        try:
+            quantity = int(quantity_str)
+            if quantity <= 0:
+                raise ValueError
+        except ValueError:
+            messagebox.showwarning("Input Error", "Quantity must be a positive integer.")
+            return
+
+        product = next((p for p in products_data if p["name"] == name), None)
+        if not product:
+            messagebox.showerror("Error", "Product not found.")
+            return
+
+        selected_products.append({
+            "name": name,
+            "quantity": quantity,
+            "price": product["price"]
+        })
+
+        refresh_receipt_display()
+
+        # Reset fields
+        product_combo.set("")
+        quantity_entry.delete(0, tk.END)
+
+    def refresh_receipt_display():
+        receipt_box.delete(0, tk.END)
+        total = 0
+        for item in selected_products:
+            line = f"{item['name']} x{item['quantity']} = €{item['quantity'] * item['price']:.2f}"
+            receipt_box.insert(tk.END, line)
+            total += item['quantity'] * item['price']
+        total_label.config(text=f"Total: €{total:.2f}")
+
+    def save_receipt():
+     if not selected_products:
+         messagebox.showwarning("Empty Receipt", "No products added.")
+         return
+
+     if not os.path.exists("receipts"):
+            os.makedirs("receipts")
+
+     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+     readable_date = datetime.now().strftime("%d %B %Y, %H:%M")
+     filename = f"receipts/receipt_{timestamp}.txt"
+
+     total = 0
+     receipt_lines = [
+        "      ★ Techie Store Receipt ★",
+        "=============================================",
+        f"Date: {readable_date}",
+        "",
+        f"{'Product':<20}{'Qty':<5}{'Unit':<8}{'Total':<8}",
+        "-" * 45
+    ]
+
+     for item in selected_products:
+        line_total = item['quantity'] * item['price']
+        receipt_lines.append(
+            f"{item['name']:<20}{item['quantity']:<5}€{item['price']:<8.2f}€{line_total:<8.2f}"
+        )
+        total += line_total
+
+     receipt_lines += [
+          "-" * 45,
+        f"{'Total:':<24}{'':5}{'':5}€{total:<8.2f}",
+        "",
+        "Thank you for shopping with us!",
+        "We hope to see you again soon 😊",
+    ]
+
+     with open(filename, "w", encoding="utf-8") as f:
+        f.write("\n".join(receipt_lines))
+
+     messagebox.showinfo("Receipt Saved", f"Receipt saved to:\n{filename}")
+
+    # GUI Window
+    window = tk.Toplevel(root)
+    window.title("Task 8: Create Receipt")
+
+    x = root.winfo_x() + root.winfo_width()
+    y = root.winfo_y()
+    window.geometry(f"600x500+{x}+{y}")
+
+    tk.Label(window, text="Select Product:").pack(pady=(10, 0))
+    product_combo = ttk.Combobox(window, values=product_names, width=40)
+    product_combo.pack(pady=5)
+
+    tk.Label(window, text="Enter Quantity:").pack()
+    quantity_entry = tk.Entry(window, width=20)
+    quantity_entry.pack(pady=5)
+
+    tk.Button(window, text="Add Product", command=add_product).pack(pady=10)
+
+    receipt_box = tk.Listbox(window, width=50, height=12)
+    receipt_box.pack(pady=10)
+
+    total_label = tk.Label(window, text="Total: €0.00", font=("Arial", 12, "bold"))
+    total_label.pack(pady=5)
+
+    tk.Button(window, text="Save Receipt", command=save_receipt).pack(pady=10)
 # ---------- MAIN MENU ----------
 def main_menu():
     root = tk.Tk()
@@ -369,6 +489,7 @@ def main_menu():
     tk.Button(root, text="Task 4: Search in Dictionary", width=40, command=lambda: display_task_4(root)).pack(pady=5)
     tk.Button(root, text="Task 5: Filter Sales by Quantity", width=40, command=lambda: display_task_5(root)).pack(pady=5)
     tk.Button(root, text="Task 7: Add New Sale", width=40, command=lambda: display_task_7(root)).pack(pady=5)
+    tk.Button(root, text="Task 8: Receipt Form", command=lambda: display_task_8(root)).pack(pady=5)
 
 
     root.mainloop()

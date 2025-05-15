@@ -24,6 +24,11 @@
             "productName": "adad",
             "quantity": 88,
             "date": "2025-05-29"
+        },
+        {
+            "productName": "Lactose-free Milk",
+            "quantity": 3,
+            "date": "2025-05-27"
         }
     ]
 }

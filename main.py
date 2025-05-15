@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import *
-from tkinter import messagebox
+from tkinter import ttk, messagebox
 from tkcalendar import Calendar
 import json
 import os
@@ -267,80 +267,79 @@ def display_task_5(root):
 
 # ---------- TASK 7 ----------
 def display_task_7(root):
+    # Load product names from data/products.json
+    with open("data/products.json", "r", encoding="utf-8") as f:
+        product_data = json.load(f)
+        product_names = [item['name'] for item in product_data['products']]
+
     sales = [("Apple", 20, "2025-05-01"), ("Banana", 30, "2025-05-02")]
 
-    # На тази задача вместо да се въвежда ръчно в полета може да има опция да се
-    # изкарват данни от json-а и да влизат в dowpdown
     def add_sale():
-     name = name_entry.get()
-     quantity = quantity_entry.get()
-     date = cal.get_date()
+        name = product_combobox.get()
+        quantity = quantity_entry.get()
+        date = cal.get_date()
 
-     if not name or not quantity or not date:
-        messagebox.showwarning("Input Error", "Please fill in all fields.")
-        return
+        if not name or not quantity or not date:
+            messagebox.showwarning("Input Error", "Please fill in all fields.")
+            return
 
-     try:
-        quantity = int(quantity)
-     except ValueError:
-        messagebox.showwarning("Input Error", "Quantity must be a number.")
-        return
+        try:
+            quantity = int(quantity)
+        except ValueError:
+            messagebox.showwarning("Input Error", "Quantity must be a number.")
+            return
 
-     new_sale = {"productName": name, "quantity": quantity, "date": date}
+        new_sale = {"productName": name, "quantity": quantity, "date": date}
 
-    # Read existing sales
-     if os.path.exists("data/sales.json"):
-        with open("data/sales.json", "r", encoding="utf-8") as f:
-            data = json.load(f)
-     else:
-        data = {}
+        # Read existing sales
+        if os.path.exists("data/sales.json"):
+            with open("data/sales.json", "r", encoding="utf-8") as f:
+                data = json.load(f)
+        else:
+            data = {}
 
-     sales_list = data.get("sales", [])
-     sales_list.append(new_sale)
-     data["sales"] = sales_list
+        sales_list = data.get("sales", [])
+        sales_list.append(new_sale)
+        data["sales"] = sales_list
 
-     with open("data/sales.json", "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=4)
+        with open("data/sales.json", "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=4)
 
-     listbox.insert(tk.END, f"{name} - {quantity} pcs on {date}")
-     name_entry.delete(0, tk.END)
-     quantity_entry.delete(0, tk.END)
+        listbox.insert(tk.END, f"{name} - {quantity} pcs on {date}")
+        quantity_entry.delete(0, tk.END)
 
-
+    # Create window
     window = tk.Toplevel(root)
     window.title("Task 7: Add New Sale")
-
-
     x = root.winfo_x() + root.winfo_width()
     y = root.winfo_y()
-    window.geometry(f"600x400+{x}+{y}")
+    window.geometry(f"600x500+{x}+{y}")
 
-
+    # Product Name (dropdown)
     tk.Label(window, text="Product Name:").pack(pady=(10, 0))
-    name_entry = tk.Entry(window, width=40)
-    name_entry.pack(pady=5)
+    product_combobox = ttk.Combobox(window, values=product_names, state="readonly", width=37)
+    product_combobox.pack(pady=5)
+    product_combobox.set(product_names[0])  # Default selection
 
-
+    # Quantity
     tk.Label(window, text="Quantity:").pack(pady=(10, 0))
     quantity_entry = tk.Entry(window, width=40)
     quantity_entry.pack(pady=5)
 
-
+    # Date picker
     tk.Label(window, text="Select Date:").pack(pady=(10, 0))
     cal = Calendar(window, selectmode='day', date_pattern='yyyy-mm-dd')
     cal.pack(pady=5)
 
-
+    # Add Button
     tk.Button(window, text="Add Sale", command=add_sale).pack(pady=10)
 
-
-    listbox = tk.Listbox(window, width=50, height=15)
+    # Sales List
+    listbox = tk.Listbox(window, width=50, height=10)
     listbox.pack(padx=10, pady=10)
-
 
     for sale in sales:
         listbox.insert(tk.END, f"{sale[0]} - {sale[1]} pcs on {sale[2]}")
-
 
 # ---------- MAIN MENU ----------
 def main_menu():

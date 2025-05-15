@@ -24,6 +24,12 @@ class Table:
                 self.e.grid(row=i, column=j)
                 self.e.insert(END, lst[i][j])
 
+def format_display_date(date_str):
+    try:
+        dt = datetime.strptime(date_str, "%Y-%m-%d")
+        return dt.strftime("%d.%m.%Y") 
+    except ValueError:
+        return date_str  # in case it’s already formatted or invalid
  
 # Am i in dzhan
 # ---------- TASK 1 ----------
@@ -248,7 +254,14 @@ def display_task_5(root):
             widget.destroy()
 
         # Prepare the list to feed Table class: first row headers + data rows
-        table_data = [headers] + data
+        # Format date column (3rd column) in each row
+        formatted_data = []
+        for row in data:
+         formatted_row = list(row)
+         formatted_row[2] = format_display_date(row[2])  # format the date
+         formatted_data.append(formatted_row)
+
+        table_data = [headers] + formatted_data
 
         global lst, total_rows, total_columns
         lst = table_data
@@ -309,7 +322,11 @@ def display_task_7(root):
         with open("data/sales.json", "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4)
 
-        listbox.insert(tk.END, f"{name} - {quantity} pcs on {date}")
+        dt = datetime.strptime(date, "%Y-%m-%d")
+        formatted_date = f"{dt.day}.{dt.month}.{dt.year}"
+
+        listbox.insert(tk.END, f"{name} - {quantity} pcs on {formatted_date}")
+
         quantity_entry.delete(0, tk.END)
 
     # Create window
@@ -343,7 +360,10 @@ def display_task_7(root):
     listbox.pack(padx=10, pady=10)
 
     for sale in sales:
-        listbox.insert(tk.END, f"{sale[0]} - {sale[1]} pcs on {sale[2]}")
+     dt = datetime.strptime(sale[2], "%Y-%m-%d")
+     formatted_date = f"{dt.day}.{dt.month}.{dt.year}"
+     listbox.insert(tk.END, f"{sale[0]} - {sale[1]} pcs on {formatted_date}")
+
 
 
 # ---------- TASK 8 ----------

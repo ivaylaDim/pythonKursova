@@ -104,7 +104,7 @@ def display_task_1(root):
     close_button = tk.Button(window, text="Close", command=window.destroy)
     close_button.grid(row=total_rows + 1, columnspan=total_columns, pady=10)
 
-#--------TASK 2---------
+""" #--------TASK 2---------
 #razdeleni za da moje da raboti table (murzi me)
 #ne sa pravilni opisaniqta na funkciite no mi trqbvaha dve za dvete tablici
 def display_task_2(root):
@@ -137,7 +137,7 @@ def display_task_2(root):
     close_button = tk.Button(window, text="Close", command=window.destroy)
     close_button.grid(row=total_rows + 1, columnspan=total_columns, pady=10)
 
-
+ """
 # ---------- TASK 3 ----------
 def summarize_sales(sales):
     summary = {}
@@ -500,7 +500,7 @@ def main_menu():
 
 
     tk.Button(root, text="Task 1&2 Dispalay Products", width=40, command=lambda: display_task_1(root)).pack(pady=5)
-    tk.Button(root, text="Task 1&2: Display Sales", width=40, command=lambda: display_task_2(root)).pack(pady=5)
+    # tk.Button(root, text="Task 1&2: Display Sales", width=40, command=lambda: display_task_2(root)).pack(pady=5)
     tk.Button(root, text="Task 3: Summary Dictionary", width=40, command=lambda: display_task_3(root)).pack(pady=5)
     tk.Button(root, text="Task 4: Search in Dictionary", width=40, command=lambda: display_task_4(root)).pack(pady=5)
     tk.Button(root, text="Task 5: Filter Sales by Quantity", width=40, command=lambda: display_task_5(root)).pack(pady=5)

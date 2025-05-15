@@ -112,7 +112,13 @@ def display_task_2(root):
     window = tk.Toplevel(root)
     window.title("Task 2: Display Sales")
     headers = ['Name', 'Quantity', 'Date']
-    table_data = [headers] + [list(sale) for sale in sales]
+    table_rows = []
+    for sale in sales:
+        name, quantity, date = sale
+        formatted_date = format_display_date(date)
+        table_rows.append([name, quantity, formatted_date])
+
+    table_data = [headers] + table_rows
     
    
     # Position window beside the main window
@@ -360,9 +366,9 @@ def display_task_7(root):
     listbox.pack(padx=10, pady=10)
 
     for sale in sales:
-     dt = datetime.strptime(sale[2], "%Y-%m-%d")
-     formatted_date = f"{dt.day}.{dt.month}.{dt.year}"
+     formatted_date = format_display_date(sale[2])
      listbox.insert(tk.END, f"{sale[0]} - {sale[1]} pcs on {formatted_date}")
+
 
 
 

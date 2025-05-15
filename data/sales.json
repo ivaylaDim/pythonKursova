@@ -19,56 +19,6 @@
             "productName": "Cappuccino",
             "quantity": 2,
             "date": "2025-05-04"
-        },
-        {
-            "productName": "adad",
-            "quantity": 88,
-            "date": "2025-05-29"
-        },
-        {
-            "productName": "Lactose-free Milk",
-            "quantity": 3,
-            "date": "2025-05-27"
-        },
-        {
-            "productName": "Green Tea",
-            "quantity": 69,
-            "date": "2025-05-15"
-        },
-        {
-            "productName": "Espresso",
-            "quantity": 6,
-            "date": "2025-05-13"
-        },
-        {
-            "productName": "Espresso",
-            "quantity": 8,
-            "date": "2025-05-13"
-        },
-        {
-            "productName": "Espresso",
-            "quantity": 78,
-            "date": "2025-05-22"
-        },
-        {
-            "productName": "Espresso",
-            "quantity": 7,
-            "date": "2025-05-15"
-        },
-        {
-            "productName": "Espresso",
-            "quantity": 8,
-            "date": "2025-05-15"
-        },
-        {
-            "productName": "Espresso",
-            "quantity": 78,
-            "date": "2025-05-15"
-        },
-        {
-            "productName": "Espresso",
-            "quantity": 8,
-            "date": "2025-05-23"
         }
     ]
 }

@@ -192,11 +192,24 @@ def display_task_4(root):
 
 
     def search():
-        product = entry.get().strip().capitalize()
-        if product in summary:
-            result_label.config(text=f"{product} → Total Sold: {summary[product]}")
-        else:
+        product_input = entry.get().strip().lower()
+        print(f"User input (lowercased): '{product_input}'")  # DEBUG
+
+        found = False
+        for key in summary:
+            key_lower = key.lower()
+            print(f"Comparing with key: '{key}' (lowercased: '{key_lower}')")  # DEBUG
+
+            if key_lower == product_input:
+                result_label.config(text=f"{key} → Total Sold: {summary[key]}", fg="blue")
+                found = True
+                break
+
+        if not found:
             result_label.config(text="Product not found.", fg="red")
+
+
+
 
 
     tk.Button(window, text="Search", command=search).pack(pady=5)

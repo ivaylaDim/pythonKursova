@@ -29,6 +29,11 @@
             "productName": "Lactose-free Milk",
             "quantity": 3,
             "date": "2025-05-27"
+        },
+        {
+            "productName": "Green Tea",
+            "quantity": 69,
+            "date": "2025-05-15"
         }
     ]
 }

@@ -1,0 +1,12 @@
+      ★ Techie Store Receipt ★
+=============================================
+Date: 15 May 2025, 10:57
+
+Product             Qty  Unit    Total   
+---------------------------------------------
+Cappuccino          5    €3.50    €17.50   
+---------------------------------------------
+Total:                            €17.50   
+
+Thank you for shopping with us!
+We hope to see you again soon 😊

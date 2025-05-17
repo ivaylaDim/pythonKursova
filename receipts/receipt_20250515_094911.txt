@@ -1,0 +1,12 @@
+      ★ Techie Store Receipt ★
+=============================================
+Date: 15 May 2025, 09:49
+
+Product             Qty  Unit    Total   
+---------------------------------------------
+Croissant           69   €3.90    €269.10  
+---------------------------------------------
+Total:                            €269.10  
+
+Thank you for shopping with us!
+We hope to see you again soon 😊

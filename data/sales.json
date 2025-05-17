@@ -53,6 +53,30 @@
             "quantity": 1,
             "date": "2025-05-17",
             "saleID": 4
+        },
+        {
+            "productName": "Croissant",
+            "quantity": 1,
+            "date": "2025-05-17",
+            "saleID": 5
+        },
+        {
+            "productName": "Matcha latte",
+            "quantity": 3,
+            "date": "2025-05-17",
+            "saleID": 5
+        },
+        {
+            "productName": "Croissant",
+            "quantity": 1,
+            "date": "2025-05-17",
+            "saleID": 6
+        },
+        {
+            "productName": "Matcha latte",
+            "quantity": 3,
+            "date": "2025-05-17",
+            "saleID": 6
         }
     ]
 }

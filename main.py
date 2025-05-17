@@ -29,7 +29,7 @@ def format_display_date(date_str):
         dt = datetime.strptime(date_str, "%Y-%m-%d")
         return dt.strftime("%d.%m.%Y") 
     except ValueError:
-        return date_str  # in case it’s already formatted or invalid
+        return date_str  # in case its already formatted or invalid
  
 # Am i in dzhan
 
@@ -433,10 +433,13 @@ def new_transaction(root):
      filename = f"receipts/receipt_{timestamp}.txt"
 
      total = 0
+     # Get transaction ID before creating receipt
+     transaction_id = add_from_receipt(selected_products, current_date)
      receipt_lines = [
         "      ★ Coffee Store Receipt ★",
         "=============================================",
         f"Date: {readable_date}",
+        f"Transaction ID: {transaction_id}",
         "",
         f"{'Product':<20}{'Qty':<5}{'Unit':<8}{'Total':<8}",
         "-" * 45
@@ -464,7 +467,6 @@ def new_transaction(root):
      messagebox.showinfo("Receipt Saved", f"Receipt saved to:\n{filename}")
 
  
-
     # GUI Window
     window = tk.Toplevel(root)
     window.title("Task 8: Create Receipt")
@@ -495,22 +497,23 @@ def new_transaction(root):
 def main_menu():
     root = tk.Tk()
     bg = PhotoImage(file = "img\coffee.png")
+    root.geometry("545x365")
+    root.resizable(False,False)
     label1 = Label( root, image = bg)
     label1.place(x = 0, y = 0)
-    root.title("Course Project Menu")
+    root.title("Cafe Management Menu")
     root.iconbitmap("img\images.ico") #samostoqtelno izrabotena s gimp!!
 
-    tk.Label(root, text="Choose a Task to View:", font=("Arial", 14)).pack(pady=10)
+    tk.Label(root, text="Welcome to Cafe management system!", font=("Arial",14)).pack(pady=10)
 
-
-    tk.Button(root, text="Task 1&2 Dispalay Products", width=40, command=lambda: product_list(root)).pack(pady=5)
+    tk.Button(root, text="Task 1&2 Dispalay Products",font=("Arial", 11), width=30, command=lambda: product_list(root)).pack(pady=10)
     # tk.Button(root, text="Task 1&2: Display Sales", width=40, command=lambda: display_task_2(root)).pack(pady=5)
-    tk.Button(root, text="Task 3: Summary Dictionary", width=40, command=lambda: summary_sales(root)).pack(pady=5)
-    tk.Button(root, text="Task 4: Search in Dictionary", width=40, command=lambda: search_product(root)).pack(pady=5)
-    tk.Button(root, text="Task 5: Filter Sales by Quantity", width=40, command=lambda: filter_sales(root)).pack(pady=5)
-    tk.Button(root, text="Task 7: Add New Sale", width=40, command=lambda: new_sale(root)).pack(pady=5) #wip
-    tk.Button(root, text="Task 8: Receipt Form", command=lambda: new_transaction(root)).pack(pady=5)
-
+    tk.Button(root, text="Task 3: Summary Dictionary", font=("Arial", 11),width=30,command=lambda: summary_sales(root)).pack(pady=5)
+    tk.Button(root, text="Task 4: Search in Dictionary", font=("Arial", 11),width=30,  command=lambda: search_product(root)).pack(pady=5)
+    tk.Button(root, text="Task 5: Filter Sales by Quantity", font=("Arial", 11),width=30, command=lambda: filter_sales(root)).pack(pady=5)
+    tk.Button(root, text="Task 7: Add New Sale", width=30,font=("Arial", 11), command=lambda: new_sale(root)).pack(pady=5) #wip
+    tk.Button(root, text="Task 8: Receipt Form",width=30, font=("Arial", 11),command=lambda: new_transaction(root)).pack(pady=5)
+    tk.Button(root, text="Exit",font=("Arial", 11), width=20,command=root.destroy).pack(pady=5)
 
     root.mainloop()
 

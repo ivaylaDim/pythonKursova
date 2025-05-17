@@ -1,0 +1,14 @@
+      ★ Coffee Store Receipt ★
+=============================================
+Date: 17 May 2025, 16:44
+
+Product             Qty  Unit    Total   
+---------------------------------------------
+Chocolate Muffin    1    €4.90    €4.90    
+Croissant           1    €3.90    €3.90    
+Espresso            1    €1.20    €1.20    
+---------------------------------------------
+Total:                            €10.00   
+
+Thank you for shopping with us!
+We hope to see you again soon 😊

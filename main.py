@@ -95,40 +95,40 @@ def product_list(root):
     close_button = tk.Button(window, text="Close", command=window.destroy)
     close_button.grid(row=total_rows + 1, columnspan=total_columns, pady=10)
 
-""" #--------TASK 2---------
-#razdeleni za da moje da raboti table (murzi me)
-#ne sa pravilni opisaniqta na funkciite no mi trqbvaha dve za dvete tablici
-def display_task_2(root):
-    sales = read_sales("data/sales.json")
-    window = tk.Toplevel(root)
-    window.title("Task 2: Display Sales")
-    headers = ['Name', 'Quantity', 'Date']
-    table_rows = []
-    for sale in sales:
-        name, quantity, date = sale
-        formatted_date = format_display_date(date)
-        table_rows.append([name, quantity, formatted_date])
+# #--------TASK 2---------
+# #razdeleni za da moje da raboti table (murzi me)
+# #ne sa pravilni opisaniqta na funkciite no mi trqbvaha dve za dvete tablici
+# def display_task_2(root):
+#     sales = read_sales("data/sales.json")
+#     window = tk.Toplevel(root)
+#     window.title("Task 2: Display Sales")
+#     headers = ['Name', 'Quantity', 'Date']
+#     table_rows = []
+#     for sale in sales:
+#         name, quantity, date = sale
+#         formatted_date = format_display_date(date)
+#         table_rows.append([name, quantity, formatted_date])
 
-    table_data = [headers] + table_rows
+#     table_data = [headers] + table_rows
     
    
-    # Position window beside the main window
-    x = root.winfo_x() + root.winfo_width()
-    y = root.winfo_y()
-    window.geometry(f"600x400+{x}+{y}")
+#     # Position window beside the main window
+#     x = root.winfo_x() + root.winfo_width()
+#     y = root.winfo_y()
+#     window.geometry(f"600x400+{x}+{y}")
 
-    # Set global variables for table
-    global lst, total_rows, total_columns
-    lst = table_data
-    total_rows = len(lst)
-    total_columns = len(lst[0])
+#     # Set global variables for table
+#     global lst, total_rows, total_columns
+#     lst = table_data
+#     total_rows = len(lst)
+#     total_columns = len(lst[0])
 
-    # Create table
-    Table(window)
-    close_button = tk.Button(window, text="Close", command=window.destroy)
-    close_button.grid(row=total_rows + 1, columnspan=total_columns, pady=10)
+#     # Create table
+#     Table(window)
+#     close_button = tk.Button(window, text="Close", command=window.destroy)
+#     close_button.grid(row=total_rows + 1, columnspan=total_columns, pady=10)
 
- """
+
 # ---------- TASK 3 ----------
 def summarize_sales(sales):
     summary = {}
@@ -265,79 +265,141 @@ def filter_sales(root):
 
 
 # ---------- TASK 7 ----------
-def new_sale(root):
-    with open("data/products.json", "r", encoding="utf-8") as file:
-        product_data = json.load(file)
-        product_names = [item['name'] for item in product_data['products']]
+# def new_sale(root):
+#     with open("data/products.json", "r", encoding="utf-8") as file:
+#         product_data = json.load(file)
+#         product_names = [item['name'] for item in product_data['products']]
 
-    sales = []
+#     sales = []
 
-    def add_sale():
-        name = product_combobox.get()
-        quantity = quantity_entry.get()
-        date = cal.get_date()
+#     def add_sale():
+#         name = product_combobox.get()
+#         quantity = quantity_entry.get()
+#         date = cal.get_date()
 
-        if not name or not quantity or not date:
-            messagebox.showwarning("Input Error", "Please fill in all fields.")
-            return
+#         if not name or not quantity or not date:
+#             messagebox.showwarning("Input Error", "Please fill in all fields.")
+#             return
 
-        try:
-            quantity = int(quantity)
-        except ValueError:
-            messagebox.showwarning("Input Error", "Quantity must be a number.")
-            return
+#         try:
+#             quantity = int(quantity)
+#         except ValueError:
+#             messagebox.showwarning("Input Error", "Quantity must be a number.")
+#             return
 
-        new_sale = {"productName": name, "quantity": quantity, "date": date}
+#         new_sale = {"productName": name, "quantity": quantity, "date": date}
 
-        if os.path.exists("data/sales.json"):
-            with open("data/sales.json", "r", encoding="utf-8") as file:
-                data = json.load(file)
-        else:
-            data = {}
+#         if os.path.exists("data/sales.json"):
+#             with open("data/sales.json", "r", encoding="utf-8") as file:
+#                 data = json.load(file)
+#         else:
+#             data = {}
 
-        sales_list = data.get("sales", [])
-        sales_list.append(new_sale)
-        data["sales"] = sales_list
+#         sales_list = data.get("sales", [])
+#         sales_list.append(new_sale)
+#         data["sales"] = sales_list
 
-        with open("data/sales.json", "w", encoding="utf-8") as file:
+#         with open("data/sales.json", "w", encoding="utf-8") as file:
+#             json.dump(data, file, indent=4)
+
+#         dt = datetime.strptime(date, "%Y-%m-%d")
+#         formatted_date = f"{dt.day}.{dt.month}.{dt.year}"
+
+#         listbox.insert(tk.END, f"{name} - {quantity} pcs on {formatted_date}")
+
+#         quantity_entry.delete(0, tk.END)
+
+#     window = tk.Toplevel(root)
+#     window.title("Task 7: Add New Sale")
+#     x = root.winfo_x() + root.winfo_width()
+#     y = root.winfo_y()
+#     window.geometry(f"600x500+{x}+{y}")
+
+#     # Product Name (dropdown)
+#     tk.Label(window, text="Product Name:").pack(pady=(10, 0))
+#     product_combobox = ttk.Combobox(window, values=product_names, state="readonly", width=37)
+#     product_combobox.pack(pady=5)
+#     product_combobox.set(product_names[0])  # Default selection
+
+#     tk.Label(window, text="Quantity:").pack(pady=(10, 0))
+#     quantity_entry = tk.Entry(window, width=40)
+#     quantity_entry.pack(pady=5)
+
+#     tk.Label(window, text="Select Date:").pack(pady=(10, 0))
+#     cal = Calendar(window, selectmode='day', date_pattern='yyyy-mm-dd')
+#     cal.pack(pady=5)
+
+#     tk.Button(window, text="Add Sale", command=add_sale).pack(pady=10)
+
+#     listbox = tk.Listbox(window, width=50, height=10)
+#     listbox.pack(padx=10, pady=10)
+
+#     for sale in sales:
+#      formatted_date = format_display_date(sale[2])
+#      listbox.insert(tk.END, f"{sale[0]} - {sale[1]} pcs on {formatted_date}")
+
+def new_product(root):
+    product = []
+    with open("data/products.json", "r") as file:
+        data = json.load(file)
+
+    existing_categories = set()
+    for product in data.get("products", []):
+        if "category" in product:
+            existing_categories.add(product["category"])
+
+    category_list = sorted(list(existing_categories))
+
+    highest_id = 0
+    for product in data.get("products", []):
+        product_id = int(product.get("productID", 0))
+        if product_id > highest_id:
+            highest_id = product_id
+
+
+    
+    def save_product():
+        product_name = product.get().strip()
+        category_name = category.get().strip()
+        price_tag = price.get().strip()
+        price_value = float(price_tag)
+
+        new_product = {
+            "productID": str(highest_id + 1),
+            "name": product_name,
+            "category": category_name,
+            "price": price_value
+        }
+
+        data["products"].append(new_product)
+        with open("data/products.json", "w") as file:
             json.dump(data, file, indent=4)
 
-        dt = datetime.strptime(date, "%Y-%m-%d")
-        formatted_date = f"{dt.day}.{dt.month}.{dt.year}"
+        messagebox.showinfo("Add new product", f"Product {product_name} added successfully.")
 
-        listbox.insert(tk.END, f"{name} - {quantity} pcs on {formatted_date}")
-
-        quantity_entry.delete(0, tk.END)
+        product.delete(0, tk.END)
+        price.delete(0, tk.END)
+        category.set("")
 
     window = tk.Toplevel(root)
-    window.title("Task 7: Add New Sale")
+    window.title("Task 7: Add New Product")
     x = root.winfo_x() + root.winfo_width()
     y = root.winfo_y()
-    window.geometry(f"600x500+{x}+{y}")
+    window.geometry(f"600x400+{x}+{y}")
 
-    # Product Name (dropdown)
     tk.Label(window, text="Product Name:").pack(pady=(10, 0))
-    product_combobox = ttk.Combobox(window, values=product_names, state="readonly", width=37)
-    product_combobox.pack(pady=5)
-    product_combobox.set(product_names[0])  # Default selection
+    product = tk.Entry(window, width=37)
+    product.pack(pady=5)
+    tk.Label(window, text="Product Category:").pack(pady=(10, 0))
+    category = ttk.Combobox(window, values=category_list, width=37)
+    category.pack(pady=5)
+    tk.Label(window, text="Product Price:").pack(pady=(10, 0))
+    price= tk.Entry(window, width=37)
+    price.pack(pady=5)
 
-    tk.Label(window, text="Quantity:").pack(pady=(10, 0))
-    quantity_entry = tk.Entry(window, width=40)
-    quantity_entry.pack(pady=5)
-
-    tk.Label(window, text="Select Date:").pack(pady=(10, 0))
-    cal = Calendar(window, selectmode='day', date_pattern='yyyy-mm-dd')
-    cal.pack(pady=5)
-
-    tk.Button(window, text="Add Sale", command=add_sale).pack(pady=10)
-
-    listbox = tk.Listbox(window, width=50, height=10)
-    listbox.pack(padx=10, pady=10)
-
-    for sale in sales:
-     formatted_date = format_display_date(sale[2])
-     listbox.insert(tk.END, f"{sale[0]} - {sale[1]} pcs on {formatted_date}")
-
+    tk.Button(window,text="Add product", command=save_product).pack(pady=5)
+    tk.Button(window,text="Close",command=window.destroy).pack(pady=5)
+   
 # add recepit products to sales.json
       
 def add_from_receipt(products, sale_date):
@@ -460,7 +522,7 @@ def new_transaction(root):
         "We hope to see you again soon 😊",
     ]
 
-     with open(filename, "w", encoding="utf-8") as f:
+     with open(filename, "w", encoding="utf-8") as file:
         f.write("\n".join(receipt_lines))
 
      add_from_receipt(selected_products, current_date)
@@ -506,13 +568,13 @@ def main_menu():
 
     tk.Label(root, text="Welcome to Cafe management system!", font=("Arial",14)).pack(pady=10)
 
-    tk.Button(root, text="Task 1&2 Dispalay Products",font=("Arial", 11), width=30, command=lambda: product_list(root)).pack(pady=10)
+    tk.Button(root, text="Product Menu",font=("Arial", 11), width=30, command=lambda: product_list(root)).pack(pady=10)
     # tk.Button(root, text="Task 1&2: Display Sales", width=40, command=lambda: display_task_2(root)).pack(pady=5)
-    tk.Button(root, text="Task 3: Summary Dictionary", font=("Arial", 11),width=30,command=lambda: summary_sales(root)).pack(pady=5)
-    tk.Button(root, text="Task 4: Search in Dictionary", font=("Arial", 11),width=30,  command=lambda: search_product(root)).pack(pady=5)
-    tk.Button(root, text="Task 5: Filter Sales by Quantity", font=("Arial", 11),width=30, command=lambda: filter_sales(root)).pack(pady=5)
-    tk.Button(root, text="Task 7: Add New Sale", width=30,font=("Arial", 11), command=lambda: new_sale(root)).pack(pady=5) #wip
-    tk.Button(root, text="Task 8: Receipt Form",width=30, font=("Arial", 11),command=lambda: new_transaction(root)).pack(pady=5)
+    tk.Button(root, text="Sales Summary", font=("Arial", 11),width=30,command=lambda: summary_sales(root)).pack(pady=5)
+    tk.Button(root, text="Search by Product", font=("Arial", 11),width=30,  command=lambda: search_product(root)).pack(pady=5)
+    tk.Button(root, text="Filter Sales by Quantity", font=("Arial", 11),width=30, command=lambda: filter_sales(root)).pack(pady=5)
+    tk.Button(root, text="Add New Product", width=30,font=("Arial", 11), command=lambda: new_product(root)).pack(pady=5) #wip
+    tk.Button(root, text="Add Receipt",width=30, font=("Arial", 11),command=lambda: new_transaction(root)).pack(pady=5)
     tk.Button(root, text="Exit",font=("Arial", 11), width=20,command=root.destroy).pack(pady=5)
 
     root.mainloop()

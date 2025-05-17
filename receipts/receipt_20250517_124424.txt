@@ -1,0 +1,14 @@
+      ★ Techie Store Receipt ★
+=============================================
+Date: 17 May 2025, 12:44
+
+Product             Qty  Unit    Total   
+---------------------------------------------
+Cappuccino          1    €3.50    €3.50    
+Green Tea           1    €2.00    €2.00    
+Lactose-free Milk   1    €0.50    €0.50    
+---------------------------------------------
+Total:                            €6.00    
+
+Thank you for shopping with us!
+We hope to see you again soon 😊

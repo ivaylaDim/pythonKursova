@@ -493,8 +493,11 @@ def display_task_8(root):
 # ---------- MAIN MENU ----------
 def main_menu():
     root = tk.Tk()
+    bg = PhotoImage(file = "img\coffee.png")
+    label1 = Label( root, image = bg)
+    label1.place(x = 0, y = 0)
     root.title("Course Project Menu")
-
+    root.iconbitmap("img\images.ico") #samostoqtelno izrabotena s gimp!!
 
     tk.Label(root, text="Choose a Task to View:", font=("Arial", 14)).pack(pady=10)
 

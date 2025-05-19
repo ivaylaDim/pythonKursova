@@ -558,13 +558,13 @@ def new_transaction(root):
 # ---------- MAIN MENU ----------
 def main_menu():
     root = tk.Tk()
-    bg = PhotoImage(file = "img\coffee.png")
+    bg = PhotoImage(file = "img/coffee.png")
     root.geometry("545x365")
     root.resizable(False,False)
     label1 = Label( root, image = bg)
     label1.place(x = 0, y = 0)
     root.title("Cafe Management Menu")
-    root.iconbitmap("img\images.ico") #samostoqtelno izrabotena s gimp!!
+    root.iconbitmap("img/images.ico") #samostoqtelno izrabotena s gimp!!
 
     tk.Label(root, text="Welcome to Cafe management system!", font=("Arial",14)).pack(pady=10)
 

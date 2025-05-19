@@ -77,6 +77,24 @@
             "quantity": 3,
             "date": "2025-05-17",
             "saleID": 6
+        },
+        {
+            "productName": "NewDzhanII",
+            "quantity": 123,
+            "date": "2025-05-19",
+            "saleID": 7
+        },
+        {
+            "productName": "NewDzhanII",
+            "quantity": 123,
+            "date": "2025-05-19",
+            "saleID": 8
+        },
+        {
+            "productName": "NewDzhanII",
+            "quantity": 123,
+            "date": "2025-05-19",
+            "saleID": 9
         }
     ]
 }

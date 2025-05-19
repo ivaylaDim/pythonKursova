@@ -523,7 +523,7 @@ def new_transaction(root):
     ]
 
      with open(filename, "w", encoding="utf-8") as file:
-        f.write("\n".join(receipt_lines))
+        file.write("\n".join(receipt_lines))
 
      add_from_receipt(selected_products, current_date)
      messagebox.showinfo("Receipt Saved", f"Receipt saved to:\n{filename}")

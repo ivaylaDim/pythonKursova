@@ -89,6 +89,12 @@
             "name": "test",
             "category": "test",
             "price": 99999.0
+        },
+        {
+            "productID": "16",
+            "name": "NewDzhanII",
+            "category": "Pastries",
+            "price": 1.0
         }
     ]
 }

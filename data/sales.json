@@ -79,22 +79,16 @@
             "saleID": 6
         },
         {
-            "productName": "NewDzhanII",
-            "quantity": 123,
-            "date": "2025-05-19",
-            "saleID": 7
+            "productName": "Green Tea",
+            "quantity": 2,
+            "date": "2025-05-20",
+            "saleID": 10
         },
         {
-            "productName": "NewDzhanII",
-            "quantity": 123,
-            "date": "2025-05-19",
-            "saleID": 8
-        },
-        {
-            "productName": "NewDzhanII",
-            "quantity": 123,
-            "date": "2025-05-19",
-            "saleID": 9
+            "productName": "Green Tea",
+            "quantity": 2,
+            "date": "2025-05-20",
+            "saleID": 10
         }
     ]
 }

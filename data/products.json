@@ -83,6 +83,12 @@
             "name": "Blueberry Cake",
             "category": "Pastries",
             "price": 4.5
+        },
+        {
+            "productID": "15",
+            "name": "Irish Coffee",
+            "category": "Alcohol",
+            "price": 5.99
         }
     ]
 }

@@ -89,6 +89,42 @@
             "quantity": 2,
             "date": "2025-05-20",
             "saleID": 10
+        },
+        {
+            "productName": "Chocolate Muffin",
+            "quantity": 5,
+            "date": "2025-05-20",
+            "saleID": 11
+        },
+        {
+            "productName": "Chocolate Muffin",
+            "quantity": 5,
+            "date": "2025-05-20",
+            "saleID": 12
+        },
+        {
+            "productName": "Irish Coffee",
+            "quantity": 3,
+            "date": "2025-05-20",
+            "saleID": 13
+        },
+        {
+            "productName": "Milk",
+            "quantity": 3,
+            "date": "2025-05-20",
+            "saleID": 13
+        },
+        {
+            "productName": "Irish Coffee",
+            "quantity": 3,
+            "date": "2025-05-20",
+            "saleID": 14
+        },
+        {
+            "productName": "Milk",
+            "quantity": 3,
+            "date": "2025-05-20",
+            "saleID": 14
         }
     ]
 }

@@ -1,0 +1,14 @@
+      ★ Coffee Store Receipt ★
+=============================================
+Date: 20 May 2025, 18:13
+Transaction ID: 13
+
+Product             Qty  Unit    Total   
+---------------------------------------------
+Irish Coffee        3    €5.99    €17.97   
+Milk                3    €0.20    €0.60    
+---------------------------------------------
+Total:                            €18.57   
+
+Thank you for shopping with us!
+We hope to see you again soon 😊

@@ -1,0 +1,13 @@
+      ★ Coffee Store Receipt ★
+=============================================
+Date: 20 May 2025, 17:31
+Transaction ID: 11
+
+Product             Qty  Unit    Total   
+---------------------------------------------
+Chocolate Muffin    5    €4.90    €24.50   
+---------------------------------------------
+Total:                            €24.50   
+
+Thank you for shopping with us!
+We hope to see you again soon 😊

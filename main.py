@@ -83,7 +83,7 @@ def product_list(root):
 
     x = root.winfo_x() + root.winfo_width()
     y = root.winfo_y()
-    window.geometry(f"600x400+{x}+{y}")
+    window.geometry(f"650x400+{x}+{y}")
 
     global lst, total_rows, total_columns
     lst = table_data
@@ -149,7 +149,7 @@ def summary_sales(root):
 
     x = root.winfo_x() + root.winfo_width()
     y = root.winfo_y()
-    window.geometry(f"600x400+{x}+{y}")
+    window.geometry(f"350x400+{x}+{y}")
 
     headers = ['Product Name', 'Total Sold']
     table_data = [headers] + [[product, total] for product, total in summary.items()]
@@ -176,7 +176,7 @@ def search_product(root):
 
     x = root.winfo_x() + root.winfo_width()
     y = root.winfo_y()
-    window.geometry(f"600x400+{x}+{y}")
+    window.geometry(f"300x300+{x}+{y}")
 
     tk.Label(window, text="Enter product name:").pack(pady=5)
     entry = tk.Entry(window, width=30)
@@ -220,7 +220,7 @@ def filter_sales(root):
 
     x = root.winfo_x() + root.winfo_width()
     y = root.winfo_y()
-    window.geometry(f"600x400+{x}+{y}")
+    window.geometry(f"600x600+{x}+{y}")
 
     tk.Label(window, text="Minimum Quantity:").pack(pady=(10, 0))
     spinbox = tk.Spinbox(window, from_=1, to=100, width=5)
@@ -385,7 +385,7 @@ def new_product(root):
     window.title("Task 7: Add New Product")
     x = root.winfo_x() + root.winfo_width()
     y = root.winfo_y()
-    window.geometry(f"600x400+{x}+{y}")
+    window.geometry(f"300x300+{x}+{y}")
 
     tk.Label(window, text="Product Name:").pack(pady=(10, 0))
     product = tk.Entry(window, width=37)
@@ -535,7 +535,7 @@ def new_transaction(root):
 
     x = root.winfo_x() + root.winfo_width()
     y = root.winfo_y()
-    window.geometry(f"600x500+{x}+{y}")
+    window.geometry(f"450x500+{x}+{y}")
 
     tk.Label(window, text="Select Product:").pack(pady=(10, 0))
     product_combo = ttk.Combobox(window, values=product_names, width=40)

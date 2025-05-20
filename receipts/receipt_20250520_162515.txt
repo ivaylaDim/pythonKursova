@@ -1,13 +1,15 @@
       ★ Coffee Store Receipt ★
 =============================================
-Date: 19 May 2025, 13:48
-Transaction ID: 8
+Date: 20 May 2025, 16:25
+Transaction ID: 10
 
 Product             Qty  Unit    Total   
 ---------------------------------------------
-NewDzhanII          123  €1.00    €123.00  
+Green Tea           2    €2.00    €4.00    
+Green Tea           2    €2.00    €4.00    
+Milk                1    €0.20    €0.20    
 ---------------------------------------------
-Total:                            €123.00  
+Total:                            €8.20    
 
 Thank you for shopping with us!
 We hope to see you again soon 😊

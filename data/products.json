@@ -69,8 +69,8 @@
         {
             "productID": 12,
             "name": "Americano",
-            "category": "ts pmo",
-            "price": 9.99
+            "category": "Coffee",
+            "price": 3.5
         },
         {
             "productID": "13",
@@ -83,18 +83,6 @@
             "name": "Blueberry Cake",
             "category": "Pastries",
             "price": 4.5
-        },
-        {
-            "productID": "15",
-            "name": "test",
-            "category": "test",
-            "price": 99999.0
-        },
-        {
-            "productID": "16",
-            "name": "NewDzhanII",
-            "category": "Pastries",
-            "price": 1.0
         }
     ]
 }

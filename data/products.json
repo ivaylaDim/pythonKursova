@@ -4,62 +4,97 @@
             "productID": 1,
             "name": "Espresso",
             "category": "Coffee",
-            "price": 1.20
+            "price": 1.2
         },
         {
             "productID": 2,
             "name": "Cappuccino",
             "category": "Coffee",
-            "price": 3.50
+            "price": 3.5
         },
-        
         {
             "productID": 3,
             "name": "Chocolate Muffin",
             "category": "Pastries",
-            "price": 4.90
+            "price": 4.9
         },
         {
             "productID": 4,
             "name": "Green Tea",
             "category": "Tea",
-            "price": 2.00
+            "price": 2.0
         },
         {
             "productID": 5,
             "name": "Croissant",
             "category": "Pastries",
-            "price": 3.90
+            "price": 3.9
         },
         {
-            "productID":6,
+            "productID": 6,
             "name": "Latte",
-            "category":"Coffee",
-            "price":2.50
+            "category": "Coffee",
+            "price": 2.5
         },
         {
-            "productID":7,
-            "name":"Matcha latte",
-            "category":"Tea",
-            "price":4.20
+            "productID": 7,
+            "name": "Matcha Latte",
+            "category": "Tea",
+            "price": 4.2
         },
         {
-            "productID":8,
-            "name":"Milk",
-            "category":"Extras",
-            "price":0.20
+            "productID": 8,
+            "name": "Milk",
+            "category": "Extras",
+            "price": 0.2
         },
         {
-            "productID":9,
-            "name":"Lactose-free Milk",
-            "category":"Extras",
-            "price":0.50
+            "productID": 9,
+            "name": "Lactose-free Milk",
+            "category": "Extras",
+            "price": 0.5
         },
         {
-            "productID":10,
-            "name":"Espresso shot",
-            "category":"Extras",
-            "price":1.00
+            "productID": 10,
+            "name": "Espresso Shot",
+            "category": "Extras",
+            "price": 1.0
+        },
+        {
+            "productID": 11,
+            "name": "Strawberry Matcha",
+            "category": "Tea",
+            "price": 5.0
+        },
+        {
+            "productID": 12,
+            "name": "Americano",
+            "category": "ts pmo",
+            "price": 9.99
+        },
+        {
+            "productID": "13",
+            "name": "Whipped Cream",
+            "category": "Extras",
+            "price": 0.5
+        },
+        {
+            "productID": "14",
+            "name": "Blueberry Cake",
+            "category": "Pastries",
+            "price": 4.5
+        },
+        {
+            "productID": "15",
+            "name": "test",
+            "category": "test",
+            "price": 99999.0
+        },
+        {
+            "productID": "16",
+            "name": "NewDzhanII",
+            "category": "Pastries",
+            "price": 1.0
         }
     ]
 }

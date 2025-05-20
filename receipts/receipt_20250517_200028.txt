@@ -1,12 +1,14 @@
-      ★ Techie Store Receipt ★
+      ★ Coffee Store Receipt ★
 =============================================
-Date: 15 May 2025, 10:57
+Date: 17 May 2025, 20:00
+Transaction ID: 5
 
 Product             Qty  Unit    Total   
 ---------------------------------------------
-Cappuccino          5    €3.50    €17.50   
+Croissant           1    €3.90    €3.90    
+Matcha latte        3    €4.20    €12.60   
 ---------------------------------------------
-Total:                            €17.50   
+Total:                            €16.50   
 
 Thank you for shopping with us!
 We hope to see you again soon 😊

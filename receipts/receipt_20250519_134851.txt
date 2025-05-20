@@ -1,13 +1,13 @@
-      ★ Techie Store Receipt ★
+      ★ Coffee Store Receipt ★
 =============================================
-Date: 15 May 2025, 09:47
+Date: 19 May 2025, 13:48
+Transaction ID: 8
 
 Product             Qty  Unit    Total   
 ---------------------------------------------
-Espresso            2    €1.20    €2.40    
-Chocolate Muffin    3    €4.90    €14.70   
+NewDzhanII          123  €1.00    €123.00  
 ---------------------------------------------
-Total:                            €17.10   
+Total:                            €123.00  
 
 Thank you for shopping with us!
 We hope to see you again soon 😊
